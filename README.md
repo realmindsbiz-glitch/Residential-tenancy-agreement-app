@@ -2,6 +2,14 @@
 
 A private, browser-based version of Ontario’s Residential Tenancy Agreement, based on the supplied form **2229E (2020/12)**. Fill in all 17 sections, add landlords and tenants, review the agreement, and print or save it as a PDF. The general-information appendix and signature lines are included. The printable layout differs from the Adobe form; the original is available under `public/original-lease.pdf`.
 
+## Test on a Mac without Terminal
+
+Download the repository ZIP from GitHub and extract it. Right-click **Ontario-Lease-Preview.html** in the extracted folder and choose **Open With → Safari** (or Chrome). This self-contained preview does not require installation, a server, or publishing. It includes the same editor and print view as the hosted app.
+
+The editor uses larger type and spacious controls. **A+ Larger text** increases the text further and remembers your preference where browser storage is available. **Go to a section** jumps directly between all 17 sections. Long agreement notes can be expanded while editing; the full wording is always included in the review and printout.
+
+Developers: regenerate this preview with `npm run build:preview` whenever the files in `public/` change. Keep the `public/` directory alongside it to use the original PDF download link.
+
 ## Run
 
 Use Node.js 20 or newer (validated with Node 24):
@@ -16,8 +24,8 @@ The server uses port 3000; set `PORT` to change it. `npm run dev` restarts the s
 ## Drafts and printing
 
 - Enter information section by section. Rent totals update automatically.
-- **Save on device** opts into browser local storage. Before opting in, information is held in memory and is lost on refresh. After opting in, edits save automatically. Shared-device users should clear their draft when finished.
-- **Export draft** downloads a JSON file; **Import** restores an exported file. These files contain the entered personal information.
+- **Save draft** opts into browser local storage. Before opting in, information is held in memory and is lost on refresh. After opting in, edits save automatically. Shared-device users should clear their draft when finished.
+- **Download draft** downloads a JSON file; **Open draft** restores a downloaded file. These files contain the entered personal information.
 - **Review & print** shows the complete agreement. Use **Print / Save as PDF** and select your printer or the browser’s PDF destination. The print stylesheet uses Letter paper and excludes navigation and editing controls. Disable browser headers/footers for a clean copy.
 - Signature lines are intended for signing after printing. This app does not collect electronic signatures.
 - Additional terms entered in Section 15 print as a separate attachment.

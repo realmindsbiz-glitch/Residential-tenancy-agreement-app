@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "node --test",
-    "test:browser": "node scripts/browser-check.cjs"
+    "test:browser": "node scripts/browser-check.cjs",
+    "build:preview": "node scripts/build-preview.mjs"
   },
   "engines": {
     "node": ">=20"
