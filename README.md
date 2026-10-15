@@ -6,7 +6,7 @@ A private, browser-based version of Ontario’s Residential Tenancy Agreement, b
 
 Download the repository ZIP from GitHub and extract it. Right-click **Ontario-Lease-Preview.html** in the extracted folder and choose **Open With → Safari** (or Chrome). This self-contained preview does not require installation, a server, or publishing. It includes the same editor and print view as the hosted app.
 
-The editor uses larger type and spacious controls. **A+ Larger text** increases the text further and remembers your preference where browser storage is available. **Go to a section** jumps directly between all 17 sections. Long agreement notes can be expanded while editing; the full wording is always included in the review and printout.
+The editor uses a seven-step horizontal progress guide, grouped cards, locally hosted Roboto type, and spacious controls inspired by the supplied reference screenshot. All 17 statutory lease sections remain in the review and printout. **A+ Larger text** increases the text further and remembers your preference where browser storage is available. **Go to a section** jumps directly between all 17 sections. Long agreement notes can be expanded while editing; the full wording is always included in the review and printout.
 
 Developers: regenerate this preview with `npm run build:preview` whenever the files in `public/` change. Keep the `public/` directory alongside it to use the original PDF download link.
 
@@ -27,10 +27,11 @@ The server uses port 3000; set `PORT` to change it. `npm run dev` restarts the s
 - **Save draft** opts into browser local storage. Before opting in, information is held in memory and is lost on refresh. After opting in, edits save automatically. Shared-device users should clear their draft when finished.
 - **Download draft** downloads a JSON file; **Open draft** restores a downloaded file. These files contain the entered personal information.
 - **Review & print** shows the complete agreement. Use **Print / Save as PDF** and select your printer or the browser’s PDF destination. The print stylesheet uses Letter paper and excludes navigation and editing controls. Disable browser headers/footers for a clean copy.
-- Signature lines are intended for signing after printing. This app does not collect electronic signatures.
+- In **Step 6 · Signatures**, each landlord and tenant can **Draw signature** with a mouse, trackpad, or touch, or choose **Type signature**. **Undo last stroke** and **Clear signature** let them correct it. Electronic signing requires agreement of all parties. Unsigned spaces remain available for signing after printing.
+- Signatures and dates are included in saved/downloaded drafts and printed PDFs. They stay with their signer if another person is removed. Changing a signer’s name clears their earlier signature so they can sign again. This is local signature capture; the app does not send signing invitations or provide identity verification or an audit trail.
 - Additional terms entered in Section 15 print as a separate attachment.
 
-Information is not submitted to the server. There are no third-party scripts, fonts, or analytics. A previously saved draft remains on that browser until cleared.
+Information is not submitted to the server. There are no third-party network requests or analytics. Roboto font files are hosted locally, with their license in `public/fonts/`, and embedded in the standalone preview. A previously saved draft remains on that browser until cleared.
 
 ## Verify
 
