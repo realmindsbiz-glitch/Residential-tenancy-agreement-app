@@ -39,4 +39,4 @@ The web form transcribes the supplied 2020/12 document; it does not automaticall
 
 The `public/` directory is a complete static website. Relative asset paths support the repository's GitHub Pages URL. The `gh-pages` branch contains the contents of that directory. In repository **Settings → Pages**, choose **Deploy from a branch**, select **gh-pages** and **/ (root)**, then save. GitHub will display the published URL when deployment completes.
 
-To publish later edits, commit the app changes and push `git subtree split --prefix public HEAD` to `gh-pages` without force pushing. No entered lease data is included in the deployment; drafts exist only in the user's browser or exported JSON file.
+To publish later edits, update the `gh-pages` branch with the contents of `public/`, keeping those files at the branch root and preserving its commit history. No entered lease data is included in the deployment; drafts exist only in the user's browser or exported JSON file.
