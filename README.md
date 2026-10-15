@@ -24,12 +24,13 @@ The server uses port 3000; set `PORT` to change it. `npm run dev` restarts the s
 ## Drafts and printing
 
 - Enter information section by section. Rent totals update automatically.
-- **Save draft** opts into browser local storage. Before opting in, information is held in memory and is lost on refresh. After opting in, edits save automatically. Shared-device users should clear their draft when finished.
-- **Download draft** downloads a JSON file; **Open draft** restores a downloaded file. These files contain the entered personal information.
+- **Save draft** opts into browser local storage. Before opting in, information is held in memory and is lost on refresh. After opting in, edits save automatically. The browser warns before leaving with unsaved edits. If device storage is unavailable, use Download draft to keep a copy. Shared-device users should clear their draft when finished.
+- **Download draft** downloads a JSON file; **Open draft** restores a downloaded file. Invalid draft files are rejected without replacing the current draft. These files contain the entered personal information.
 - **Review & print** shows the complete agreement. Use **Print / Save as PDF** and select your printer or the browser’s PDF destination. The print stylesheet uses Letter paper and excludes navigation and editing controls. Disable browser headers/footers for a clean copy.
 - In **Step 6 · Signatures**, each landlord and tenant can **Draw signature** with a mouse, trackpad, or touch, or choose **Type signature**. **Undo last stroke** and **Clear signature** let them correct it. Electronic signing requires agreement of all parties. Unsigned spaces remain available for signing after printing.
-- Signatures and dates are included in saved/downloaded drafts and printed PDFs. They stay with their signer if another person is removed. Changing a signer’s name clears their earlier signature so they can sign again. This is local signature capture; the app does not send signing invitations or provide identity verification or an audit trail.
-- Additional terms entered in Section 15 print as a separate attachment.
+- Signatures and dates are included in saved/downloaded drafts and printed PDFs. Changing lease details or adding/removing a party clears earlier signatures and signature dates, and asks everyone to sign the updated agreement again. This is local signature capture; the app does not send signing invitations or provide identity verification or an audit trail.
+- Additional terms print as a separate attachment only when that option is selected in Section 15. Other conditional details, such as deposits and fixed term end dates, print only when the corresponding option is selected. Inactive text stays in the draft in case you switch back.
+- Blank or partial agreements can be printed. Entered amounts and date order are checked before review. If the browser’s print shortcut bypasses review with invalid values, the printout is visibly marked as a draft needing correction.
 
 Information is not submitted to the server. There are no third-party network requests or analytics. Roboto font files are hosted locally, with their license in `public/fonts/`, and embedded in the standalone preview. A previously saved draft remains on that browser until cleared.
 
@@ -40,7 +41,7 @@ npm test
 npm run test:browser
 ```
 
-Server tests check all sections and appendix parts, the original PDF, and file access boundaries. Browser checks exercise repeated tenants, local saving/restoration, rent calculations, NSF amount validation, review, signature lines, PDF generation, and mobile overflow. They require Chromium at `/usr/bin/chromium`, or set `CHROMIUM_PATH` to another executable. With Playwright-managed browsers, install Chromium using `npx playwright install chromium` first.
+Server tests check all sections and appendix parts, the original PDF, and file access boundaries. Browser checks exercise repeated tenants, local saving/restoration, rent calculations, NSF amount validation, review, drawn/typed/touch signatures, PDF generation, mobile overflow, a complete filled-in lease, invalid saved/imported drafts, conditional fields, date order, signature clearing after edits, escaped text, unsaved changes, and unavailable browser storage. Automated browser validation uses Chromium. They require Chromium at `/usr/bin/chromium`, or set `CHROMIUM_PATH` to another executable. With Playwright-managed browsers, install Chromium using `npx playwright install chromium` first.
 
 The web form transcribes the supplied 2020/12 document; it does not automatically update when Ontario revises the form. The source PDF is retained for comparison. This app is not an official government website.
 

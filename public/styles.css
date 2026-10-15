@@ -349,3 +349,5 @@ dialog p { font-size: 1rem; line-height: 1.8; }
   .standard-document > span:nth-child(2) { flex: 1; min-width: 150px; }
   .standard-document .text-button { flex-basis: 100%; text-align: left; margin: 0; }
 }
+
+.print-validation-warning { border: 2px solid #92412c; border-radius: 6px; padding: 16px; margin-bottom: 24px; color: #682e1f; font-size: 11pt; line-height: 1.6; }

@@ -51,11 +51,11 @@ module.exports = async function checkSignatures({browser,base,output}) {
   assert.equal(await card('landlords:0').locator('.signature-status').textContent(),'✓ Signature added');assert.equal(await page.getByLabel('Type signature for Owner B',{exact:true}).inputValue(),'Owner B');
   // Removing a signer must not assign their signature/date to another signer.
   await page.locator('#section-jump').selectOption('1');await page.getByRole('button',{name:'Remove landlord 1',exact:true}).click();
-  await page.locator('#section-jump').selectOption('17');assert.equal(await page.getByLabel('Type signature for Owner B',{exact:true}).inputValue(),'Owner B');assert.equal(await page.getByLabel('Date signed for Owner B (optional)',{exact:true}).inputValue(),'2026-10-16');
-  await page.locator('#review-top').click();assert.equal(await page.locator('.signature-image').count(),0);assert.equal(await page.locator('.signature-typed').count(),2);
+  await page.locator('#section-jump').selectOption('17');assert.equal(await page.getByLabel('Type signature for Owner B',{exact:true}).inputValue(),'');assert.equal(await page.getByLabel('Date signed for Owner B (optional)',{exact:true}).inputValue(),'');
+  await page.locator('#review-top').click();assert.equal(await page.locator('.signature-image').count(),0);assert.equal(await page.locator('.signature-typed').count(),0);
   await page.getByRole('button',{name:/Keep editing/}).click();
-  // Renaming a party clears their prior signature, while other parties remain signed.
-  await page.locator('#section-jump').selectOption('1');await page.getByLabel('Legal name',{exact:true}).fill('New Owner');await page.locator('#section-jump').selectOption('17');assert.equal(await card('landlords:0').locator('.signature-status').textContent(),'Not signed yet');assert.equal(await card('tenants:0').locator('.signature-status').textContent(),'✓ Signature added');
+  // Changing the parties clears prior signatures instead of carrying them to an altered lease.
+  await page.locator('#section-jump').selectOption('1');await page.getByLabel('Legal name',{exact:true}).fill('New Owner');await page.locator('#section-jump').selectOption('17');assert.equal(await card('landlords:0').locator('.signature-status').textContent(),'Not signed yet');assert.equal(await card('tenants:0').locator('.signature-status').textContent(),'Not signed yet');
   // Older drafts retain their dates. Invalid vector data never becomes SVG markup.
   const oldDraft={version:1,data:{landlords:[{'Legal name':'Legacy Owner',_signatureStrokes:'[[["<script>",0]]]'}],tenants:[{}],rentExtras:[{}],otherServices:[{}],'sig-landlords-0':'2026-10-14'}};
   await page.locator('#import-file').setInputFiles({name:'old-draft.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(oldDraft))});await page.waitForFunction(()=>document.querySelector('#save-status').textContent.includes('imported'));
